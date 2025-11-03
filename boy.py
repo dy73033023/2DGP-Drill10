@@ -27,7 +27,6 @@ def left_down(e):
 def left_up(e):
     return e[0] == 'INPUT' and e[1].type == SDL_KEYUP and e[1].key == SDLK_LEFT
 
-
 # 여기를 채우시오.
 # Boy의 Run Speed 계산
 pixels_per_meter = (10.0 / 0.3)  # 10 pixel 30 cm
@@ -35,6 +34,7 @@ run_speed_kmph = 20.0  # Km / Hour
 run_speed_mpm = (run_speed_kmph * 1000.0 / 60.0)
 run_speed_mps = (run_speed_mpm / 60.0)
 run_speed_pps = (run_speed_mps * pixels_per_meter)
+
 # Boy Run Speed
 TIME_PER_ACTION = 0.5
 ACTION_PER_TIME = 1.0 / TIME_PER_ACTION

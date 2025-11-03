@@ -6,6 +6,7 @@ from bird import Bird
 import game_world
 
 import game_framework
+import random
 
 boy = None
 bird = None

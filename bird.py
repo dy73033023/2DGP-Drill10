@@ -15,3 +15,26 @@ run_speed_pps = (run_speed_mps * pixels_per_meter)
 TIME_PER_ACTION = 0.5
 ACTION_PER_TIME = 1.0 / TIME_PER_ACTION
 FRAMES_PER_ACTION = 8
+
+class Bird:
+    def __init__(self):
+        self.font = load_font('ENCR10B.TTF', 16)
+        self.item = None
+
+        self.x, self.y = 400, 90
+        self.frame = 0
+        self.face_dir = 1
+        self.dir = 0
+        self.image = load_image('bird_animation.png')
+
+        # self.FLY = Fly(self)
+
+    def update(self):
+        self.state_machine.update()
+
+    def handle_event(self, event):
+        self.state_machine.handle_state_event(('INPUT', event))
+
+    def draw(self):
+        self.state_machine.draw()
+        self.font.draw(self.x - 60, self.y + 50, f'(Time: {get_time():.2f})', (255, 255, 0))

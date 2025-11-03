@@ -30,7 +30,9 @@ class Bird:
             180, 168,         # width, height
             0, self.flip,            # 회전 없음, 플립 없음
             self.x, self.y,   # 화면 중심
-            pixels_per_meter / 3 * 2, pixels_per_meter / 3 * 2 # 날개 핀 크기 약 66cm 반영 -> 22~24 pixel
+            pixels_per_meter / 3 * 2, pixels_per_meter / 6 * 2
+            # x값 날개 핀 크기 약 66cm 반영 -> 22~24 pixel
+            # y값 날개 핀 크기 약 33cm 반영 -> 11~12 pixel
         )
 
     def update(self):

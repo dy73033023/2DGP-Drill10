@@ -1,40 +1,34 @@
-from pico2d import load_image, get_time, load_font
-
+from pico2d import *
 import game_world
 import game_framework
-from state_machine import StateMachine
 
-# Bird의 fly Speed 계산
-pixels_per_meter = (10.0 / 0.3)  # 10 pixel 30 cm
-run_speed_kmph = 20.0  # Km / Hour
-run_speed_mpm = (run_speed_kmph * 1000.0 / 60.0)
-run_speed_mps = (run_speed_mpm / 60.0)
-run_speed_pps = (run_speed_mps * pixels_per_meter)
-
-# Bird fly Speed
-TIME_PER_ACTION = 0.5
-ACTION_PER_TIME = 1.0 / TIME_PER_ACTION
-FRAMES_PER_ACTION = 8
+PIXEL_PER_METER = (1.0 / 0.03) # 1pixel = 3cm, 1m = 33.33 pixel
+GRAVITY = 9.8 # 중력 가속도 (m/s²)
 
 class Bird:
-    def __init__(self):
-        self.font = load_font('ENCR10B.TTF', 16)
-        self.item = None
+    image = None
 
-        self.x, self.y = 400, 90
-        self.frame = 0
-        self.face_dir = 1
-        self.dir = 0
-        self.image = load_image('bird_animation.png')
-
-        # self.FLY = Fly(self)
-
-    def update(self):
-        self.state_machine.update()
-
-    def handle_event(self, event):
-        self.state_machine.handle_state_event(('INPUT', event))
+    def __init__(self, x = 400, y = 300, throwin_speed = 15, throwin_angle = 45):
+        if Bird.image == None:
+            Bird.image = load_image('bird_animation.png')
+        self.x, self.y = x, y
+        self.xv = throwin_speed * math.cos(math.radians(throwin_angle))
+        self.yv = abs(throwin_speed * math.sin(math.radians(throwin_angle)))
 
     def draw(self):
-        self.state_machine.draw()
-        self.font.draw(self.x - 60, self.y + 50, f'(Time: {get_time():.2f})', (255, 255, 0))
+        self.image.draw(self.x, self.y)
+
+    def update(self):
+        # y 축 속도에 중력 가속도 적용
+        self.yv -= GRAVITY * game_framework.frame_time  # m/s
+        # 위치 업데이트
+        self.x += self.xv * game_framework.frame_time * PIXEL_PER_METER
+
+        self.y += self.yv * game_framework.frame_time * PIXEL_PER_METER
+        print('yv값 : ',self.yv)
+        print('y값 : ',self.y)
+        # 지면 충돌 처리
+        if self.y < 60:
+            game_world.remove_object(self)
+
+

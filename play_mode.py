@@ -6,10 +6,9 @@ from bird import Bird
 import game_world
 
 import game_framework
-import random
 
 boy = None
-bird = None
+bird = []
 
 def handle_events():
     global running
@@ -35,8 +34,10 @@ def init():
     boy = Boy()
     game_world.add_object(boy, 1)
 
-    bird = Bird()
-    game_world.add_object(bird, 1)
+    birds = [Bird() for i in range(10)]
+    game_world.add_objects(birds, 1)
+
+
 
 def update():
     game_world.update()

@@ -9,7 +9,7 @@ fly_speed_mpm = (fly_speed_kmph * 1000.0 / 60.0)
 fly_speed_mps = (fly_speed_mpm / 60.0)
 fly_speed_pps = (fly_speed_mps * pixels_per_meter) # 초당 픽셀 이동 거리 초속 17 ~ 22미터 정도
 
-TIME_PER_ACTION = 0.5
+TIME_PER_ACTION = 0.7
 ACTION_PER_TIME = 1.0 / TIME_PER_ACTION
 FRAMES_PER_ACTION = 5
 

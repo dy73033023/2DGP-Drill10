@@ -117,11 +117,6 @@ class Run:
             self.boy.image.clip_draw(int(self.boy.frame) * 100, 0, 100, 100, self.boy.x, self.boy.y)
 
 
-
-
-
-
-
 class Boy:
     def __init__(self):
         self.font = load_font('ENCR10B.TTF', 16)
@@ -145,15 +140,11 @@ class Boy:
             }
         )
 
-
-
     def update(self):
         self.state_machine.update()
 
-
     def handle_event(self, event):
         self.state_machine.handle_state_event(('INPUT', event))
-
 
     def draw(self):
         self.state_machine.draw()

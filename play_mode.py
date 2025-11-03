@@ -7,7 +7,6 @@ import game_world
 
 import game_framework
 
-
 boy = None
 bird = None
 

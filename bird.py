@@ -1,10 +1,11 @@
 from pico2d import *
 import game_framework
+import random
 
 PIXEL_PER_METER = (1.0 / 0.03) # 1pixel = 3cm, 1m = 33.33 pixel
 flip = ' '
 
-# Boy Run Speed
+# Bird fly Speed
 TIME_PER_ACTION = 0.5
 ACTION_PER_TIME = 1.0 / TIME_PER_ACTION
 FRAMES_PER_ACTION = 5
@@ -21,11 +22,11 @@ class Bird:
     def draw(self):
         idx = int(self.frame) % 5
         self.image.clip_composite_draw(
-            idx * 180,  168 * 2,   # left, bottom (맨 윗줄)
+            idx * 180,  168 * 2,   # left, bottom
             180, 168,         # width, height
             0, flip,            # 회전 없음, 플립 없음
             self.x, self.y,   # 화면 중심
-            200, 200          # 출력 크기 (잘림 방지)
+            PIXEL_PER_METER / 3 * 2, PIXEL_PER_METER / 3 * 2 # 비둘기 크기 66cm -> 22~24 pixel
         )
 
     def update(self):
@@ -38,7 +39,7 @@ class Bird:
         elif flip == 'h':
             self.x -= self.velocity
 
-        if self.x > 1400:
+        if self.x > 1500:
             flip = 'h'
-        elif self.x < 200:
+        elif self.x < 100:
             flip = ' '

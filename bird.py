@@ -33,8 +33,12 @@ class Bird:
 
         self.frame = (self.frame + FRAMES_PER_ACTION * ACTION_PER_TIME * game_framework.frame_time) % 5
 
-        if self.x > 1400:
-            self.x -= self.velocity
-            flip = 'h'
-        else:
+        if flip == ' ':
             self.x += self.velocity
+        elif flip == 'h':
+            self.x -= self.velocity
+
+        if self.x > 1400:
+            flip = 'h'
+        elif self.x < 200:
+            flip = ' '

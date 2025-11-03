@@ -47,3 +47,7 @@ class Bird:
             self.flip = 'h'
         elif self.x < 100:
             self.flip = ' '
+
+
+
+# 커밋용 주석처리
